@@ -1,0 +1,24 @@
+{
+    "camelcase": true,
+    "curly": true,
+    "eqeqeq": true,
+    "freeze": true,
+    "immed": true,
+    "indent": 4,
+    "newcap": true,
+    "noarg": true,
+    "noempty": true,
+    "nonbsp": true,
+    "nonew": true,
+    "plusplus": false,
+    "quotmark": "double",
+    "undef": true,
+    "unused": false,
+    "strict": true,
+    "trailing": true,
+    "maxlen": 99,
+
+    "boss": true,
+    "eqnull": true,
+    "globals": {"angular": false}
+}

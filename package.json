@@ -1,0 +1,21 @@
+{
+  "name": "ngmaskedinput",
+  "title": "ngMaskedInput",
+  "description": "Angular plugin to force the inputs follow a certain patern",
+  "version": "1.0.0alfa",
+  "homepage": "",
+  "devDependencies": {
+    "grunt": ">=0.4.4",
+    "grunt-cli": ">=0.1.13",
+    "grunt-contrib-jshint": ">=0.10.0",
+    "karma": ">=0.12.3",
+    "grunt-karma": ">=0.8.2",
+    "phantomjs": ">=1.9.7-3",
+    "jshint-stylish": ">=0.1.5",
+    "karma-jasmine": ">=0.1.5",
+    "karma-phantomjs-launcher": ">=0.1.3"
+  },
+  "scripts": {
+    "test": "grunt travis --verbose"
+  }
+}

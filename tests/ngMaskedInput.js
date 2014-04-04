@@ -14,8 +14,10 @@
 //             $scope = _$rootScope_.$new();
 //         }));
 
-//         it("should render the header and text as passed in by $scope", inject(function() {
-//             var template = $compile("<input type=\"text\" ng-model=\"input\" mask=\"(99) 9999-9999\" />")($scope);
+//         it("should render the header and text as passed in by $scope"
+    //, inject(function() {
+//             var template = $compile("<input type=\"text\" ng-model=\
+    //"input\" mask=\"(99) 9999-9999\" />")($scope);
 
 //             $scope.input = "aaa";
 //             $scope.$digest();

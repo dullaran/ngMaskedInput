@@ -1,10 +1,7 @@
 var ngMaskedInput = angular.module("ngMaskedInput", ["ngMaskedInputServices"]);
 
-ngMaskedInput.directive(
-        "mask", ["MaskedInput", function (MaskedInput) {
-
+ngMaskedInput.directive("mask", ["MaskedInput", function (MaskedInput) {
     "use strict";
-
     return {
         require: "?ngModel",
         scope: false,
@@ -16,10 +13,13 @@ ngMaskedInput.directive(
 
             elem.bind("blur", function(){
                 if (ctrl.$viewValue) {
-                    if (ctrl.$viewValue.indexOf("_") !== -1) {
-                        elem.val("");
+                    if (ctrl.$viewValue.indexOf("_") === -1) {
                         scope.$apply(function() {
-                            scope[attrs.ngModel] = "";
+                            scope[attrs.ngModel] = elem.val();
+                        });
+                    } else {
+                        scope.$apply(function() {
+                            elem.val("");
                         });
                     }
                 }
@@ -27,17 +27,16 @@ ngMaskedInput.directive(
 
             elem.on("keydown", function(e){
                 if (e.which === 8) {
-                    MaskedInput.operation = 8;
+                    MaskedInput.userOperation = 8;
                 } else if (e.which === 46) {
-                    MaskedInput.operation = 46;
+                    MaskedInput.userOperation = 46;
                 }
             });
 
             ctrl.$parsers.unshift(function (viewValue) {
-                if (viewValue){
-                    return MaskedInput.getNewViewValue(
-                        viewValue, elem, attrs, ctrl
-                    );
+                if (viewValue) {
+                    viewValue = MaskedInput.getNewViewValue(
+                        viewValue, elem, attrs, ctrl);
                 }
                 return viewValue;
             });

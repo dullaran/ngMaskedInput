@@ -1,0 +1,42 @@
+<!DOCTYPE HTML>
+<html ng-app="myApp">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>ngMaskedInput</title>
+
+  <link rel="shortcut icon" type="image/png" href="lib/jasmine-2.0.0/jasmine_favicon.png">
+  <link rel="stylesheet" type="text/css" href="lib/jasmine-2.0.0/jasmine.css">
+  <link rel="stylesheet" type="text/css" href="lib/bootstrap/css/bootstrap.css">
+
+  <!-- External ource files here... -->
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.14/angular.js"></script>
+
+  <!-- Source files here... -->
+
+  <script type="text/javascript" src="src/app.js"></script>
+  <script type="text/javascript" src="../../src/ngMaskedInput.js"></script>
+  <script type="text/javascript" src="../../src/ngMaskedInputServices.js"></script>
+
+</head>
+
+<body ng-controller="myCtrl">
+
+  <div class="container">
+        <br /><h4>Mascara de Números:</h4><br />
+        <div class="container">
+            Entrada: <input type="text" ng-model="input1" mask="(99) 9999-9999" placeholder="(99) 9999-9999"/><br />
+            Original: {{ input1 }}<br /><br />
+        </div>
+    </div><br />
+
+  <div class="container">
+        <br /><h4>Mascara de Números:</h4><br />
+        <div class="container">
+            Entrada: <input type="text" ng-model="input1" mask="(AA) 9999-9999" placeholder="(99) 9999-9999"/><br />
+            Original: {{ input1 }}<br /><br />
+        </div>
+    </div><br />
+
+</body>
+
+</html>

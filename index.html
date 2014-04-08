@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="myApp">
   <head>
     <meta charset='utf-8'>
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
@@ -8,18 +8,21 @@
     <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+    <link rel="stylesheet" type="text/css" href="lib/bootstrap/css/bootstrap.css"/>
 
     <!--[if lt IE 9]>
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.js"></script>
+    <script type="text/javascript" src="http://dullaran.github.io/ngMaskedInput/releases/ngmaskedinput-1.0.0alfa.js"></script>
 
-    <title>Ngmaskedinput by dullaran</title>
+    <title>Masked Input</title>
   </head>
 
   <body>
     <header>
       <div class="inner">
-        <h1>Ngmaskedinput</h1>
+        <h1>ng Masked Input</h1>
         <h2></h2>
         <a href="https://github.com/dullaran/ngMaskedInput" class="button"><small>View project on</small>GitHub</a>
       </div>
@@ -29,36 +32,59 @@
       <div class="inner clearfix">
         <section id="main-content">
           <h3>
-<a name="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages"><span class="octicon octicon-link"></span></a>Welcome to GitHub Pages.</h3>
 
-<p>This automatic page generator is the easiest way to create beautiful pages for all of your projects. Author your page content here using GitHub Flavored Markdown, select a template crafted by a designer, and publish. After your page is generated, you can check out the new branch:</p>
+<a name="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages"><span class="octicon octicon-link"></span></a>Masked Input Plugin</h3>
 
-<pre><code>$ cd your_repo_root/repo_name
-$ git fetch origin
-$ git checkout gh-pages
-</code></pre>
-
-<p>If you're using the GitHub for Mac, simply sync your repository and you'll see the new branch.</p>
-
-<h3>
-<a name="designer-templates" class="anchor" href="#designer-templates"><span class="octicon octicon-link"></span></a>Designer Templates</h3>
-
-<p>We've crafted some handsome templates for you to use. Go ahead and continue to layouts to browse through them. You can easily go back to edit your page before publishing. After publishing your page, you can revisit the page generator and switch to another theme. Your Page content will be preserved if it remained markdown format.</p>
+<p>
+This is a masked input plugin for the angular javascript library (no jQuery dependencies). It allows a user to more easily enter fixed width input where you would like them to enter the data in a certain format (dates, phone numbers, etc). A mask is defined by a format made up of mask literals and mask definitions. Any character not in the definitions list below is considered a mask literal. Mask literals will be automatically entered for the user as they type and will not be able to be removed by the user.The following mask definitions are predefined:
+</p>
+<ul>
+  <li>A Represents an alpha character (A-Z, a-z);</li>
+  <li>9 Represents a numeric character (0-9);</li>
+  <li>* Represents an alphanumeric character (A-Z, a-z, 0-9).</li>
+</ul>
 
 <h3>
-<a name="rather-drive-stick" class="anchor" href="#rather-drive-stick"><span class="octicon octicon-link"></span></a>Rather Drive Stick?</h3>
+<a name="rather-drive-stick" class="anchor" href="#rather-drive-stick"><span class="octicon octicon-link"></span></a>Usage</h3>
 
-<p>If you prefer to not use the automatic generator, push a branch named <code>gh-pages</code> to your repository to create a page manually. In addition to supporting regular HTML content, GitHub Pages support Jekyll, a simple, blog aware static site generator written by our own Tom Preston-Werner. Jekyll makes it easy to create site-wide headers and footers without having to copy them across every page. It also offers intelligent blog support and other advanced templating features.</p>
+<ol>
+  <li>Include the angular and masked input javascript files:</li>
+  <pre><code>
+  &lt;script type="text/javascript" src="angular.js"&gt;&lt;/script&gt;
+  &lt;script type="text/javascript" src="ngmaskedinput-1.0.0alfa.js"&gt;&lt;/script&gt;
+  </code></pre>
+  <li>Include the ngMaskedInput in requirements of your main app:</li>
+  <pre><code>
+  var myApp = angular.module('myApp', ["ngMaskedInput"]);
+  </code></pre>
+  <li>Now set the mask on input:</li>
+  <pre><code>
+  &lt;input type="text" ng-model="input" mask="(99) 9999-9999"/&gt;
+  </code></pre>
+</ol>
 
 <h3>
-<a name="authors-and-contributors" class="anchor" href="#authors-and-contributors"><span class="octicon octicon-link"></span></a>Authors and Contributors</h3>
+<a name="authors-and-contributors" class="anchor" href="#authors-and-contributors"><span class="octicon octicon-link"></span></a>Demos</h3>
 
-<p>You can <a href="https://github.com/blog/821" class="user-mention">@mention</a> a GitHub username to generate a link to their profile. The resulting <code>&lt;a&gt;</code> element will link to the contributor's GitHub Profile. For example: In 2007, Chris Wanstrath (<a href="https://github.com/defunkt" class="user-mention">@defunkt</a>), PJ Hyett (<a href="https://github.com/pjhyett" class="user-mention">@pjhyett</a>), and Tom Preston-Werner (<a href="https://github.com/mojombo" class="user-mention">@mojombo</a>) founded GitHub.</p>
+<script type="text/javascript">
+    var myApp = angular.module('myApp', ["ngMaskedInput"]);
+</script>
 
-<h3>
-<a name="support-or-contact" class="anchor" href="#support-or-contact"><span class="octicon octicon-link"></span></a>Support or Contact</h3>
+<label for="telephone">Telephone:</label><br />
+<input id+"telephone" type="text" class="form-control" ng-model="telephone" mask="(99) 9999-9999"/>Mask: (99) 9999-9999<br />
+<label for="code">Code:</label><br />
+<input id="code" type="text" class="form-control" ng-model="code" mask="AA-9999"/>Mask: AA-9999<br />
+<label for="date">Date:</label><br />
+<input id="date" type="text" class="form-control" ng-model="date" mask="99/99/9999"/>Mask: 99/99/9999<br />
+<label for="identifier">Identifier:</label><br />
+<input id="identifier" type="text" class="form-control" ng-model="identifier" mask="AA-****"/>Mask: AA-****<br />
 
-<p>Having trouble with Pages? Check out the documentation at <a href="http://help.github.com/pages">http://help.github.com/pages</a> or contact <a href="mailto:support@github.com">support@github.com</a> and we’ll help you sort it out.</p>
+<h4>Model Values</h4><br />
+  <p>Telephone: {{telephone}}</p>
+  <p>Code: {{code}}</p>
+  <p>Date: {{date}}</p>
+  <p>Identifier: {{identifier}}</p>
+
         </section>
 
         <aside id="sidebar">
@@ -71,13 +97,11 @@ $ git checkout gh-pages
             Uncompress
           </a>
 
-          <p class="repo-owner"><a href="https://github.com/dullaran/ngMaskedInput"></a> is maintained by <a href="https://github.com/dullaran">dullaran</a>.</p>
+          <p class="repo-owner"><a href="https://github.com/dullaran/ngMaskedInput"></a> is maintained by <a href="https://github.com/dullaran">Dullaran</a>.</p>
 
           <p>This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the Architect theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.</p>
         </aside>
       </div>
     </div>
-
-
   </body>
 </html>

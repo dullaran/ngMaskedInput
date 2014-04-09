@@ -2,10 +2,20 @@ describe("Masked Input", function () {
 
     "use strict";
 
-    var elem, attrs, ctrl;
+    var elem, attrs, ctrl, $compile, $scope;
+
 
     beforeEach(function () {
         module("ngMaskedInputServices");
+
+        // inject(function(_$compile_, _$rootScope_) {
+        //     $compile = _$compile_;
+        //     $scope = _$rootScope_.$new();
+        // })
+
+        // elem = $compile("<input type=\"text\" ng-model=\"input\" mask=\"(99) 9999-9999\" />")($scope)
+        // debugger;
+
         elem = {
             "0": {
                 "selectionStart": 0,
@@ -121,6 +131,59 @@ describe("Masked Input", function () {
                 MaskedInput.getNewViewValue("1", elem, attrs, ctrl);
                 expect(elem.val()).toBe("(1_) ____-____");
                 expect(ctrl.$viewValue).toBe("(1_) ____-____");
+            }
+        ));
+
+        it("shouldn't allow the insertion of invalid characters (letters)", inject(
+            function (MaskedInput) {
+                MaskedInput.getNewViewValue("A", elem, attrs, ctrl);
+                expect(elem.val()).toBe("");
+
+                elem[0].selectionStart = 3;
+                MaskedInput.getNewViewValue("(1A_) ____-____", elem, attrs, ctrl);
+                expect(elem.val()).toBe("(1_) ____-____");
+                expect(elem[0].selectionStart).toBe(2);
+            }
+        ));
+
+        it("testing functionality with letters", inject(
+            function (MaskedInput) {
+                attrs.mask = "AAAA-AAAA"
+                MaskedInput.getNewViewValue("A", elem, attrs, ctrl);
+                expect(elem.val()).toBe("A___-____");
+
+                elem[0].selectionStart = 5;
+                MaskedInput.getNewViewValue("AAAAA-____", elem, attrs, ctrl);
+                expect(elem.val()).toBe("AAAA-A___");
+                expect(elem[0].selectionStart).toBe(6);
+            }
+        ));
+
+        it("shouldn't allow the insertion of invalid characters (numbers)", inject(
+            function (MaskedInput) {
+                attrs.mask = "AAAA-AAAA"
+                MaskedInput.getNewViewValue("9", elem, attrs, ctrl);
+                expect(elem.val()).toBe("");
+
+                elem[0].selectionStart = 2;
+                MaskedInput.getNewViewValue("A1__-____", elem, attrs, ctrl);
+                expect(elem.val()).toBe("A___-____");
+                expect(elem[0].selectionStart).toBe(1);
+            }
+        ));
+
+        it("testing functionality with *", inject(
+            function (MaskedInput) {
+                attrs.mask = "A9*"
+                elem[0].selectionStart = 3;
+                MaskedInput.getNewViewValue("R5S", elem, attrs, ctrl);
+                expect(elem.val()).toBe("R5S");
+                expect(elem[0].selectionStart).toBe(3);
+
+                elem[0].selectionStart = 3;
+                MaskedInput.getNewViewValue("R55", elem, attrs, ctrl);
+                expect(elem.val()).toBe("R55");
+                expect(elem[0].selectionStart).toBe(3);
             }
         ));
     });

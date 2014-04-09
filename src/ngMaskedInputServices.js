@@ -84,6 +84,7 @@ function MaskedInputClass () {
      * @param {String} newViewValue
      */
     this.setcursor = function (elem, attrs, newViewValue) {
+        var position;
         /*
          * this.flux is the code of procedure realized by function:
          * - 0 user data is invalid

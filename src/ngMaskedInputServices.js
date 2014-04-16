@@ -95,26 +95,26 @@ function MaskedInputClass () {
          */
         switch (this.flux) {
             case 0:
-                elem[0].selectionStart = this.cursor - 1;
+                position = this.cursor - 1;
                 break;
             case 1:
-                elem[0].selectionStart = this.findFirstIndex(attrs.mask) + 1;
+                position = this.findFirstIndex(attrs.mask) + 1;
                 break;
             case 2:
-                elem[0].selectionStart = this.cursor;
+                position = this.cursor;
                 break;
             case 3:
-                elem[0].selectionStart =
+                position =
                     this.findLastIndex(attrs.mask.substring(0, this.cursor + 1));
                 // Position can be a different of valid field for user
-                if (newViewValue[elem[0].selectionStart] !== "_") {
-                    elem[0].selectionStart++;
+                if (newViewValue[position] !== "_") {
+                    position++;
                 }
                 break;
             default:
                 // Last position of input
                 if (attrs.mask[this.cursor] === undefined){
-                    elem[0].selectionStart = this.cursor;
+                    position = this.cursor;
                 // If position is different of valid field for user
                 } else if (this.validChars.indexOf(attrs.mask[this.cursor]) ===
                          -1) {
@@ -123,21 +123,21 @@ function MaskedInputClass () {
                                 attrs.mask.substring(this.cursor));
                     if (newViewValue[newCursor] !== "_" &&
                             newViewValue[newCursor] !== undefined) {
-                        elem[0].selectionStart = newCursor + 1;
+                        position = newCursor + 1;
                     } else {
-                        elem[0].selectionStart = newCursor;
+                        position = newCursor;
                     }
                 } else {
                     if (this.validChars.indexOf(attrs.mask[this.cursor - 1]) === -1 &&
                             newViewValue[this.cursor] !== undefined) {
-                        elem[0].selectionStart = this.cursor + 1;
+                        position = this.cursor + 1;
                     } else {
-                        elem[0].selectionStart = this.cursor;
+                        position = this.cursor;
                     }
                 }
         }
         this.flux = undefined;
-        elem[0].selectionEnd = elem[0].selectionStart;
+        elem[0].selectionEnd = elem[0].selectionStart = position;
     };
 
     /*

@@ -4,17 +4,8 @@ describe("Masked Input", function () {
 
     var elem, attrs, ctrl, $compile, $scope;
 
-
     beforeEach(function () {
         module("ngMaskedInputServices");
-
-        // inject(function(_$compile_, _$rootScope_) {
-        //     $compile = _$compile_;
-        //     $scope = _$rootScope_.$new();
-        // })
-
-        // elem = $compile("<input type=\"text\" ng-model=\"input\" mask=\"(99) 9999-9999\" />")($scope)
-        // debugger;
 
         elem = {
             "0": {
@@ -148,7 +139,7 @@ describe("Masked Input", function () {
 
         it("testing functionality with letters", inject(
             function (MaskedInput) {
-                attrs.mask = "AAAA-AAAA"
+                attrs.mask = "AAAA-AAAA";
                 MaskedInput.getNewViewValue("A", elem, attrs, ctrl);
                 expect(elem.val()).toBe("A___-____");
 
@@ -161,7 +152,7 @@ describe("Masked Input", function () {
 
         it("shouldn't allow the insertion of invalid characters (numbers)", inject(
             function (MaskedInput) {
-                attrs.mask = "AAAA-AAAA"
+                attrs.mask = "AAAA-AAAA";
                 MaskedInput.getNewViewValue("9", elem, attrs, ctrl);
                 expect(elem.val()).toBe("");
 
@@ -174,7 +165,7 @@ describe("Masked Input", function () {
 
         it("testing functionality with *", inject(
             function (MaskedInput) {
-                attrs.mask = "A9*"
+                attrs.mask = "A9*";
                 elem[0].selectionStart = 3;
                 MaskedInput.getNewViewValue("R5S", elem, attrs, ctrl);
                 expect(elem.val()).toBe("R5S");
